@@ -14,6 +14,7 @@ const Dashboard: React.FC = () => {
   const [statusDropdownOpen, setStatusDropdownOpen] = useState(false);
   const [sortByDropdownOpen, setSortByDropdownOpen] = useState(false);
   const [sortOrderDropdownOpen, setSortOrderDropdownOpen] = useState(false);
+  const [filtersExpanded, setFiltersExpanded] = useState(false);
 
   const filteredAndSortedCandidates = useMemo(() => {
     let filtered = dummyCandidates.filter((candidate) => {
@@ -191,60 +192,131 @@ const Dashboard: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 via-blue-50/30 to-indigo-50/30">
-      <div className="max-w-7xl mx-auto p-6 space-y-6">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-          <div className="bg-gradient-to-br from-blue-50 to-blue-100 border border-blue-200 rounded-lg p-4">
+      <div className="max-w-7xl mx-auto p-3 sm:p-6 space-y-4 sm:space-y-6">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+          <div className="bg-gradient-to-br from-blue-50 to-blue-100 border border-blue-200 rounded-lg p-3 sm:p-4">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-blue-600 text-sm font-medium">
-                  Total Candidates
+                <p className="text-blue-600 text-xs sm:text-sm font-medium">
+                  Total
                 </p>
-                <p className="text-2xl font-bold text-blue-900">
+                <p className="text-lg sm:text-2xl font-bold text-blue-900">
                   {statusCounts.total}
                 </p>
               </div>
+              <svg
+                className="h-6 w-6 sm:h-8 sm:w-8 text-blue-600"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z"
+                />
+              </svg>
             </div>
           </div>
 
-          <div className="bg-gradient-to-br from-green-50 to-green-100 border border-green-200 rounded-lg p-4">
+          <div className="bg-gradient-to-br from-green-50 to-green-100 border border-green-200 rounded-lg p-3 sm:p-4">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-green-600 text-sm font-medium">Selected</p>
-                <p className="text-2xl font-bold text-green-900">
+                <p className="text-green-600 text-xs sm:text-sm font-medium">
+                  Selected
+                </p>
+                <p className="text-lg sm:text-2xl font-bold text-green-900">
                   {statusCounts.selected}
                 </p>
               </div>
+              <svg
+                className="h-6 w-6 sm:h-8 sm:w-8 text-green-600"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                />
+              </svg>
             </div>
           </div>
 
-          <div className="bg-gradient-to-br from-red-50 to-red-100 border border-red-200 rounded-lg p-4">
+          <div className="bg-gradient-to-br from-red-50 to-red-100 border border-red-200 rounded-lg p-3 sm:p-4">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-red-600 text-sm font-medium">Rejected</p>
-                <p className="text-2xl font-bold text-red-900">
+                <p className="text-red-600 text-xs sm:text-sm font-medium">
+                  Rejected
+                </p>
+                <p className="text-lg sm:text-2xl font-bold text-red-900">
                   {statusCounts.rejected}
                 </p>
               </div>
+              <svg
+                className="h-6 w-6 sm:h-8 sm:w-8 text-red-600"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
+                />
+              </svg>
             </div>
           </div>
 
-          <div className="bg-gradient-to-br from-yellow-50 to-yellow-100 border border-yellow-200 rounded-lg p-4">
+          <div className="bg-gradient-to-br from-yellow-50 to-yellow-100 border border-yellow-200 rounded-lg p-3 sm:p-4">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-yellow-600 text-sm font-medium">On Hold</p>
-                <p className="text-2xl font-bold text-yellow-900">
+                <p className="text-yellow-600 text-xs sm:text-sm font-medium">
+                  On Hold
+                </p>
+                <p className="text-lg sm:text-2xl font-bold text-yellow-900">
                   {statusCounts.onHold}
                 </p>
               </div>
+              <svg
+                className="h-6 w-6 sm:h-8 sm:w-8 text-yellow-600"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                />
+              </svg>
             </div>
           </div>
         </div>
 
-        <div className="bg-white rounded-lg shadow-sm border p-6">
-          <h2 className="text-lg font-semibold mb-4">Filters & Search</h2>
+        {/* Filters */}
+        <div className="bg-white rounded-lg shadow-sm border p-4 sm:p-6">
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="text-lg font-semibold">Filters & Search</h2>
+            <button
+              onClick={() => setFiltersExpanded(!filtersExpanded)}
+              className="md:hidden px-3 py-1 text-sm border border-gray-300 rounded-md hover:bg-gray-50"
+            >
+              {filtersExpanded ? "Hide" : "Show"} Filters
+            </button>
+          </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-4 mb-4">
-            <div className="lg:col-span-2">
+          <div
+            className={`space-y-4 ${
+              filtersExpanded ? "block" : "hidden md:block"
+            }`}
+          >
+            <div>
               <label
                 htmlFor="search"
                 className="block text-sm font-medium text-gray-700 mb-1"
@@ -252,110 +324,156 @@ const Dashboard: React.FC = () => {
                 Search Candidates
               </label>
               <div className="relative">
+                <svg
+                  className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                  />
+                </svg>
                 <input
                   id="search"
                   type="text"
                   placeholder="Search by name or interviewer..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
                 />
               </div>
             </div>
 
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Role Applied
-              </label>
-              <Dropdown
-                isOpen={roleDropdownOpen}
-                setIsOpen={setRoleDropdownOpen}
-                value={selectedRole}
-                onSelect={setSelectedRole}
-                options={roleOptions}
-                placeholder="All Roles"
-              />
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Status
-              </label>
-              <Dropdown
-                isOpen={statusDropdownOpen}
-                setIsOpen={setStatusDropdownOpen}
-                value={selectedStatus}
-                onSelect={setSelectedStatus}
-                options={statusOptions}
-                placeholder="All Status"
-              />
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Interview Date
-              </label>
-              <input
-                type="date"
-                value={selectedDate}
-                onChange={(e) => setSelectedDate(e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-              />
-            </div>
-
-            <div className="flex items-end">
-              <button
-                onClick={clearAllFilters}
-                className="w-full px-4 py-2 border border-gray-300 rounded-md hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-              >
-                Clear Filters
-              </button>
-            </div>
-          </div>
-
-          <div className="flex flex-wrap gap-4 pt-4 border-t">
-            <div className="flex items-center space-x-2">
-              <label className="text-sm font-medium text-gray-700">
-                Sort by:
-              </label>
-              <div className="w-32">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Role Applied
+                </label>
                 <Dropdown
-                  isOpen={sortByDropdownOpen}
-                  setIsOpen={setSortByDropdownOpen}
-                  value={sortBy}
-                  onSelect={(value) =>
-                    setSortBy(value as "name" | "date" | "role")
-                  }
-                  options={sortByOptions}
-                  placeholder="Sort by"
+                  isOpen={roleDropdownOpen}
+                  setIsOpen={setRoleDropdownOpen}
+                  value={selectedRole}
+                  onSelect={setSelectedRole}
+                  options={roleOptions}
+                  placeholder="All Roles"
                 />
               </div>
-            </div>
-            <div className="flex items-center space-x-2">
-              <label className="text-sm font-medium text-gray-700">
-                Order:
-              </label>
-              <div className="w-32">
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Status
+                </label>
                 <Dropdown
-                  isOpen={sortOrderDropdownOpen}
-                  setIsOpen={setSortOrderDropdownOpen}
-                  value={sortOrder}
-                  onSelect={(value) => setSortOrder(value as "asc" | "desc")}
-                  options={sortOrderOptions}
-                  placeholder="Order"
+                  isOpen={statusDropdownOpen}
+                  setIsOpen={setStatusDropdownOpen}
+                  value={selectedStatus}
+                  onSelect={setSelectedStatus}
+                  options={statusOptions}
+                  placeholder="All Status"
                 />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Interview Date
+                </label>
+                <input
+                  type="date"
+                  value={selectedDate}
+                  onChange={(e) => setSelectedDate(e.target.value)}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
+                />
+              </div>
+
+              <div className="flex items-end">
+                <button
+                  onClick={clearAllFilters}
+                  className="w-full px-4 py-2 border border-gray-300 rounded-md hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
+                >
+                  Clear Filters
+                </button>
+              </div>
+            </div>
+
+            <div className="flex flex-col sm:flex-row gap-4 pt-4 border-t">
+              <div className="flex items-center space-x-2">
+                <label className="text-sm font-medium text-gray-700">
+                  Sort by:
+                </label>
+                <div className="w-32">
+                  <Dropdown
+                    isOpen={sortByDropdownOpen}
+                    setIsOpen={setSortByDropdownOpen}
+                    value={sortBy}
+                    onSelect={(value) =>
+                      setSortBy(value as "name" | "date" | "role")
+                    }
+                    options={sortByOptions}
+                    placeholder="Sort by"
+                  />
+                </div>
+              </div>
+              <div className="flex items-center space-x-2">
+                <label className="text-sm font-medium text-gray-700">
+                  Order:
+                </label>
+                <div className="w-32">
+                  <Dropdown
+                    isOpen={sortOrderDropdownOpen}
+                    setIsOpen={setSortOrderDropdownOpen}
+                    value={sortOrder}
+                    onSelect={(value) => setSortOrder(value as "asc" | "desc")}
+                    options={sortOrderOptions}
+                    placeholder="Order"
+                  />
+                </div>
               </div>
             </div>
           </div>
         </div>
 
         <div className="bg-white rounded-lg shadow-sm border">
-          <div className="p-6 border-b">
+          <div className="p-4 sm:p-6 border-b">
             <h2 className="text-lg font-semibold">
               Candidates ({statusCounts.total})
             </h2>
           </div>
-          <div className="overflow-x-auto">
+
+          <div className="block sm:hidden">
+            {filteredAndSortedCandidates.length === 0 ? (
+              <div className="text-center p-8 text-gray-500">
+                No candidates found matching your filters.
+              </div>
+            ) : (
+              <div className="divide-y divide-gray-200">
+                {filteredAndSortedCandidates.map((candidate) => (
+                  <div key={candidate.id} className="p-4 space-y-2">
+                    <div className="flex items-start justify-between">
+                      <div>
+                        <h3 className="font-medium text-gray-900">
+                          {candidate.name}
+                        </h3>
+                        <p className="text-sm text-gray-600">
+                          {candidate.roleApplied}
+                        </p>
+                      </div>
+                      {getStatusBadge(candidate.status)}
+                    </div>
+                    <div className="text-sm text-gray-600">
+                      <p>Interview: {candidate.interviewDate}</p>
+                      <p>Interviewer: {candidate.interviewerName}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+
+          <div className="hidden sm:block overflow-x-auto">
             <table className="w-full">
               <thead>
                 <tr className="border-b border-gray-200">
