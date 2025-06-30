@@ -204,19 +204,6 @@ const Dashboard: React.FC = () => {
                   {statusCounts.total}
                 </p>
               </div>
-              <svg
-                className="h-6 w-6 sm:h-8 sm:w-8 text-blue-600"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z"
-                />
-              </svg>
             </div>
           </div>
 
@@ -230,19 +217,6 @@ const Dashboard: React.FC = () => {
                   {statusCounts.selected}
                 </p>
               </div>
-              <svg
-                className="h-6 w-6 sm:h-8 sm:w-8 text-green-600"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-                />
-              </svg>
             </div>
           </div>
 
@@ -256,19 +230,6 @@ const Dashboard: React.FC = () => {
                   {statusCounts.rejected}
                 </p>
               </div>
-              <svg
-                className="h-6 w-6 sm:h-8 sm:w-8 text-red-600"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
-                />
-              </svg>
             </div>
           </div>
 
@@ -282,19 +243,6 @@ const Dashboard: React.FC = () => {
                   {statusCounts.onHold}
                 </p>
               </div>
-              <svg
-                className="h-6 w-6 sm:h-8 sm:w-8 text-yellow-600"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-                />
-              </svg>
             </div>
           </div>
         </div>
@@ -302,7 +250,6 @@ const Dashboard: React.FC = () => {
         {/* Filters */}
         <div className="bg-white rounded-lg shadow-sm border p-4 sm:p-6">
           <div className="flex items-center justify-between mb-4">
-            <h2 className="text-lg font-semibold">Filters & Search</h2>
             <button
               onClick={() => setFiltersExpanded(!filtersExpanded)}
               className="md:hidden px-3 py-1 text-sm border border-gray-300 rounded-md hover:bg-gray-50"
@@ -316,39 +263,39 @@ const Dashboard: React.FC = () => {
               filtersExpanded ? "block" : "hidden md:block"
             }`}
           >
-            <div>
-              <label
-                htmlFor="search"
-                className="block text-sm font-medium text-gray-700 mb-1"
-              >
-                Search Candidates
-              </label>
-              <div className="relative">
-                <svg
-                  className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+              <div>
+                <label
+                  htmlFor="search"
+                  className="block text-sm font-medium text-gray-700 mb-1"
                 >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                  Search Candidates
+                </label>
+                <div className="relative">
+                  <svg
+                    className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                    />
+                  </svg>
+                  <input
+                    id="search"
+                    type="text"
+                    placeholder="Search by name or interviewer..."
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
                   />
-                </svg>
-                <input
-                  id="search"
-                  type="text"
-                  placeholder="Search by name or interviewer..."
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                  className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
-                />
+                </div>
               </div>
-            </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
                   Role Applied
@@ -396,41 +343,6 @@ const Dashboard: React.FC = () => {
                 >
                   Clear Filters
                 </button>
-              </div>
-            </div>
-
-            <div className="flex flex-col sm:flex-row gap-4 pt-4 border-t">
-              <div className="flex items-center space-x-2">
-                <label className="text-sm font-medium text-gray-700">
-                  Sort by:
-                </label>
-                <div className="w-32">
-                  <Dropdown
-                    isOpen={sortByDropdownOpen}
-                    setIsOpen={setSortByDropdownOpen}
-                    value={sortBy}
-                    onSelect={(value) =>
-                      setSortBy(value as "name" | "date" | "role")
-                    }
-                    options={sortByOptions}
-                    placeholder="Sort by"
-                  />
-                </div>
-              </div>
-              <div className="flex items-center space-x-2">
-                <label className="text-sm font-medium text-gray-700">
-                  Order:
-                </label>
-                <div className="w-32">
-                  <Dropdown
-                    isOpen={sortOrderDropdownOpen}
-                    setIsOpen={setSortOrderDropdownOpen}
-                    value={sortOrder}
-                    onSelect={(value) => setSortOrder(value as "asc" | "desc")}
-                    options={sortOrderOptions}
-                    placeholder="Order"
-                  />
-                </div>
               </div>
             </div>
           </div>
